@@ -1,0 +1,42 @@
+.home-container {
+  padding: 40px;
+  text-align: center;
+}
+
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn {
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.btn-donate {
+  background-color: #c35b32;
+  color: black;
+  border: 2px solid black;
+}
+
+.btn-donate:hover {
+  background-color: black;
+  color: white;
+}
+
+.btn-receive {
+  background-color: #c35b32;
+  color: black;
+  border: 2px solid black;
+}
+
+.btn-receive:hover {
+  background-color: black;
+  color: white;
+}
