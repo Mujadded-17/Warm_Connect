@@ -1,16 +1,16 @@
-.home-container {
+div.home-container {
   padding: 40px;
   text-align: center;
 }
 
-.button-group {
+div.home-container .button-group {
   margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 12px;
 }
 
-.btn {
+div.home-container .button-group .btn {
   padding: 12px 24px;
   text-decoration: none;
   border-radius: 6px;
@@ -19,24 +19,29 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-.btn-donate {
-  background-color: #c35b32;
+div.home-container .button-group .btn-donate {
+  background-color: #d87c2b;
   color: black;
   border: 2px solid black;
 }
 
-.btn-donate:hover {
-  background-color: black;
+div.home-container .button-group .btn-donate:hover {
+  background-color: #7a3b00;
   color: white;
 }
 
-.btn-receive {
-  background-color: #c35b32;
+div.home-container .button-group .btn-receive {
+  background-color: #d87c2b;
   color: black;
   border: 2px solid black;
 }
 
-.btn-receive:hover {
-  background-color: black;
+div.home-container .button-group .btn-receive:hover {
+  background-color: #7a3b00;
   color: white;
+}
+
+div.home-container h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
 }
