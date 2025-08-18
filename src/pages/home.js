@@ -1,4 +1,6 @@
 import '../css/home.css';
+import React from "react";
+import Footer from "../components/footer";
 const Home = () => {
     return (
         <div className="home-container">
@@ -7,6 +9,7 @@ const Home = () => {
             <a href="#donate" className="btn btn-donate">Donate</a>
             <a href="#receive" className="btn btn-receive">Receive</a>
             </div>
+            <Footer></Footer>
         </div>
     );
 
