@@ -2,14 +2,23 @@ import React from 'react';
 import '../css/browse.css';
 import { Link } from 'react-router-dom';
 
+// Import images from src/images folder
+import clothesImg from '../images/clothes.jpeg';
+import furnitureImg from '../images/furniture.jpeg';
+import stationaryImg from '../images/stationary.jpeg';
+import gadgetsImg from '../images/gadgets.jpeg';
+import grainsImg from '../images/grains.jpg';  
+import makeupImg from '../images/makeup.jpeg';
+import accessoriesImg from '../images/accessories.jpeg';
+
 const categories = [
-  { id: 1, name: 'Clothes', img: '/images/items/clothes.jpg' },
-  { id: 2, name: 'Furniture', img: '/images/items/furniture.jpg' },
-  { id: 3, name: 'Stationary', img: '/images/items/stationary.jpg' },
-  { id: 4, name: 'Gadgets', img: '/images/items/gadgets.jpg' },
-  { id: 5, name: 'Grains', img: '/images/items/grains.jpg' },
-  { id: 6, name: 'Makeup', img: '/images/items/makeup.jpg' },
-  { id: 7, name: 'Accessories', img: '/images/items/accessories.jpg' },
+  { id: 1, name: 'Clothes', img: clothesImg },
+  { id: 2, name: 'Furniture', img: furnitureImg },
+  { id: 3, name: 'Stationary', img: stationaryImg },
+  { id: 4, name: 'Gadgets', img: gadgetsImg },
+  { id: 5, name: 'Grains', img: grainsImg },
+  { id: 6, name: 'Makeup', img: makeupImg },
+  { id: 7, name: 'Accessories', img: accessoriesImg },
 ];
 
 export default function Browse() {

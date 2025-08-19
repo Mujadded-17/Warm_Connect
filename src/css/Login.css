@@ -2,7 +2,7 @@
 
 .wrapper {
   width: 100%;
-  max-width: 380px;  /* slightly smaller wrapper */
+  max-width: 380px;
   padding: 30px 25px;
   background-color: #fff;
   border-radius: 12px;
@@ -10,12 +10,12 @@
   color: #000;
   box-sizing: border-box;
   text-align: center;
-  margin: 50px auto; /* centered on page */
+  margin: 50px auto;
   font-family: 'Poppins', sans-serif;
 }
 
 header {
-  margin-top: 40px; /* pushed WarmConnect title down */
+  margin-top: 40px;
 }
 
 header h1 {
@@ -45,11 +45,12 @@ header .highlight {
   color: #000;
 }
 
-.input-box {
-  margin-bottom: 20px;
-  width: 30%;       /* reduced from 90% */
-  margin-left: auto;
-  margin-right: auto;
+/* Centering container for inputs and button */
+.form-box .input-box,
+.form-box button {
+  display: block;
+  width: 25%;       /* fixed width */
+  margin: 15px auto; /* centered */
 }
 
 .input-box input {
@@ -68,7 +69,6 @@ header .highlight {
 }
 
 button {
-  width: 30%;       /* match input width */
   padding: 12px;
   background-color: #d87c2b;
   color: #fff;
@@ -77,13 +77,12 @@ button {
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  margin: 0 auto;
-  display: block;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: #7a3b00;
+  transform: translateY(-2px);
 }
 
 .toggle-message {
@@ -106,15 +105,24 @@ button:hover {
 }
 
 .browse-link {
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .browse-link a {
-  color: #d87c2b;
+  display: block;
+  width: 25%;       /* fixed width */
+  padding: 12px 0;
+  background-color: #ffb194;
+  border-radius: 8px;
+  color: black;
+  font-weight: 600;
   text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0 auto;   /* center */
 }
 
 .browse-link a:hover {
-  color: #7a3b00;
-  text-decoration: underline;
+  background-color: #d87c2b;
+  color: #fff;
+  transform: translateY(-2px);
 }
