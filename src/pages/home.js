@@ -18,8 +18,8 @@ export default function Home() {
             Food, clothes, books, gadgets, support — all in one place.
           </p>
           <div className="actions">
-            <a href="#donate" className="btn btn--primary">Post Donation</a>
-            <a href="#browse" className="btn btn--ghost">Browse Donation</a>
+            <a href="#donate" className="btn1">Post Donation</a>
+            <a href="#browse" className="btn2">Browse Donation</a>
           </div>
         </div>
 
@@ -28,6 +28,24 @@ export default function Home() {
           <img src="/images/hero.png" alt="Helping hands" />
         </div>
       </section>
+
+      
+        {/* ===== STATS BAR ===== */}
+      <section className="stats">
+        <div className="stat">
+          <div className="stat__num">200M</div>
+          <div className="stat__label">Humans Impacted</div>
+        </div>
+        <div className="stat">
+          <div className="stat__num">50K</div>
+          <div className="stat__label">Collaborations</div>
+        </div>
+        <div className="stat">
+          <div className="stat__num">370K</div>
+          <div className="stat__label">Donations</div>
+        </div>
+      </section>
+
 
 
 
