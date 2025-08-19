@@ -9,7 +9,7 @@
 .browse-container h2 {
   color: #d87c2b;
   font-size: 2.2rem;
-  margin-bottom: 20px 0 40px;
+  margin-bottom: 20px;
   font-weight: 700;
 }
 
@@ -19,7 +19,7 @@
   justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
-  margin-bottom: 40px; /* added extra spacing */
+  margin-bottom: 40px; /* spacing after search bar */
 }
 
 .filters input,
@@ -29,6 +29,13 @@
   border: 2px solid #d87c2b;
   border-radius: 8px;
   width: 200px;
+}
+
+.filters select {
+  padding: 10px 35px 10px 14px; /* space for arrow */
+  appearance: none; /* remove default arrow */
+  background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23333' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E") no-repeat right 10px center;
+  background-size: 10px 6px;
 }
 
 /* Grid of categories */
