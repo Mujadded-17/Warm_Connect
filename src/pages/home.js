@@ -47,7 +47,7 @@ export default function Home() {
       </section>
         {/* ===== HOW IT WORKS ===== */}
       <section className="how">
-        <h2 className="section-title">HOW IT WORKS</h2>
+        <h2 className="section-title">How It Works</h2>
         <div className="how__grid">
           <div className="step">
             <span className="step__dot">01</span>
@@ -74,8 +74,52 @@ export default function Home() {
           </div>
         </div>
       </section>
+        {/* ===== TESTIMONIALS ===== */}
+      <section className="testimonials">
+        <h2 className="section-title">What People Say About Us</h2>
+        <div className="t-grid">
+          <article className="t-card">
+            
+            <p>
+              I donated my old textbooks here. A week later, I got a message from a student who used
+              them to pass his exams. Knowing something small made such a big difference felt incredible.
+            </p>
+            <img className="t-avatar" src="/images/av-3.jpg" alt="Donor" />
+          </article>
 
+          <article className="t-card">
+            
+            <p>
+              This isn’t just about giving or receiving; it’s about feeling connected. I met amazing
+              people here, and every exchange feels like a small act of kindness multiplied.
+            </p>
+            <img className="t-avatar" src="/images/av-2.jpg" alt="Receiver" />
+          </article>
+          <article className="t-card">
+            
+            <p>
+              I donated my old textbooks here. A week later, I got a message from a student who used
+              them to pass his exams. Knowing something small made such a big difference felt incredible.
+            </p>
+            <img className="t-avatar" src="/images/av-1.jpg" alt="Donor" />
+          </article>
+        </div>
+      </section>
+        {/* ===== FINAL CTA (split) ===== */}
+      <section id="donate" className="cta-split">
+        <div className="cta__left">
+          <span className="rule" />
+          <h2>
+  Kindness Begins With <br/>
+  <span class="highlight">One Click</span>
+</h2>
 
+          <a href="#donate" className="btn3">Post Donation</a>
+        </div>
+        <div className="cta__right">
+          <img src="/images/cta.jpg" alt="Volunteers" />
+        </div>
+      </section>
       <Footer />
     </main>
   );
