@@ -22,7 +22,7 @@ export default function Home() {
           <div className="actions">
 
             <a href="#donate" className="btn1">Post Donation</a>
-            <a href="#browse" className="btn2">Browse Donation</a>
+            <a href="/browse" className="btn2">Browse Donation</a>
 
           </div>
         </div>
