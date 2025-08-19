@@ -1,6 +1,8 @@
+// pages/home.js
 import React from "react";
 import "../css/home.css";
 import Footer from "../components/footer";
+import { Link } from "react-router-dom"; // <-- import Link
 
 export default function Home() {
   return (
@@ -18,8 +20,8 @@ export default function Home() {
             Food, clothes, books, gadgets, support — all in one place.
           </p>
           <div className="actions">
+            <Link to="/browse" className="btn btn--ghost">Browse Donations</Link> {/* fixed */}
             <a href="#donate" className="btn btn--primary">Post Donation</a>
-            <a href="#browse" className="btn btn--ghost">Browse Donation</a>
           </div>
         </div>
 
@@ -28,8 +30,6 @@ export default function Home() {
           <img src="/images/hero.png" alt="Helping hands" />
         </div>
       </section>
-
-
 
       <Footer />
     </main>
