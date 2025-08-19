@@ -125,7 +125,6 @@ export default function Home() {
           <img src="/images/cta.jpg" alt="Volunteers" />
         </div>
       </section>
-=======
 
       <Footer />
     </main>
