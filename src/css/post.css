@@ -27,12 +27,17 @@
   text-align: center;         /* keep main heading centered */
 }
 
+ feature/post-donation-updates
 /* Section blocks */
 .section { margin-bottom: 22px; }
 .section-title {
   font-weight: 700;
   margin-bottom: 10px;
   color: #0f0f0f;
+
+.post-form .input-box {
+  margin: 10px 0;
+ master
 }
 
 /* Grids */
