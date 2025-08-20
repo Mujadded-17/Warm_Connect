@@ -1,59 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Wrapper (no background color here) */
+.post-section {
+  width: 100%;
+  padding: 80px 16px;
+  box-sizing: border-box;
+}
+
+/* Peach card */
 .post-container {
-  max-width: 500px;
-  margin: 50px auto;
+  max-width: 720px;           /* wider to fit two-column sections */
+  margin: 0 auto;
   padding: 30px;
-  background: #fff;
+  background: #ffb194;        /* your peach color */
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  text-align: left;           /* left-align for form sections */
   font-family: 'Poppins', sans-serif;
 }
 
 .post-container h2 {
   color: #c25a19;
-  margin-bottom: 25px;
-  font-size: 1.8rem;
+  margin: 0 0 20px;
+  font-size: 1.9rem;
+  font-weight: 700;
+  text-align: center;         /* keep main heading centered */
 }
+
+ feature/post-donation-updates
+/* Section blocks */
+.section { margin-bottom: 22px; }
+.section-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #0f0f0f;
 
 .post-form .input-box {
   margin: 10px 0;
+ master
 }
 
-.post-form input,
-.post-form select {
+/* Grids */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Fields */
+.field { display: block; }
+.field input {
   width: 100%;
-  padding: 12px;
+  padding: 12px 14px;
+  background: #fff;
   border: 2px solid #d87c2b;
   border-radius: 8px;
   font-size: 15px;
   outline: none;
-  transition: border 0.3s;
+  transition: border-color .25s ease;
+  box-sizing: border-box;
 }
-
-.post-form input:focus,
-.post-form select:focus {
+.field input:focus {
   border-color: #7a3b00;
 }
 
-.post-form label {
-  margin-right: 15px;
-  font-size: 14px;
+/* Small helper text under inputs */
+.hint {
+  display: block;
+  font-size: 12px;
+  color: #555;
+  margin-top: 6px;
 }
 
+/* Your existing styles kept for donation fields */
+.post-form .input-box { margin: 14px 0; }
+.post-form select {
+  width: 100%;
+  padding: 12px 14px;
+  background: #fff;
+  border: 2px solid #d87c2b;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color .25s ease;
+  box-sizing: border-box;
+}
+.post-form select:focus { border-color: #7a3b00; }
+
+.post-form .input-box label { margin-right: 15px; font-size: 14px; }
+
+/* Submit */
 .submit-btn {
   width: 100%;
   padding: 12px;
   background-color: #d87c2b;
+  color: #fff;
   border: none;
   border-radius: 8px;
-  color: #fff;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: background .25s ease, transform .2s ease;
+  margin-top: 6px;
 }
-
 .submit-btn:hover {
   background-color: #7a3b00;
   transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .post-container { padding: 24px; }
+  .post-section { padding: 60px 16px; }
 }
