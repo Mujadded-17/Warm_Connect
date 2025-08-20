@@ -34,6 +34,13 @@ const Login = () => {
 
         <button>{isLogin ? 'Login' : 'Register'}</button>
 
+        {/* ✅ Forgot Password option only visible in Login mode */}
+        {isLogin && (
+          <p className="forgot-password">
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </p>
+        )}
+
         <p className="toggle-message">
           {isLogin ? "Don't have an account? " : "Already have an account? "}
           <span className="toggle-link" onClick={() => setIsLogin(!isLogin)}>

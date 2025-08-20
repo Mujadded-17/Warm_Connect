@@ -4,7 +4,7 @@
   width: 100%;
   max-width: 380px;
   padding: 30px 25px;
-  background-color: #fff;
+  background-color: #e6a866; /* lightest orange background */
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   color: #000;
@@ -125,4 +125,22 @@ button:hover {
   background-color: #d87c2b;
   color: #fff;
   transform: translateY(-2px);
+}
+
+/* Forgot Password Link */
+.forgot-password {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.forgot-password a {
+  color: #d87c2b;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.forgot-password a:hover {
+  color: #7a3b00;
+  text-decoration: underline;
 }
