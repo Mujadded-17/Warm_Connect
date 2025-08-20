@@ -1,8 +1,8 @@
-// pages/home.js
+// src/pages/home.js
 import React from "react";
 import "../css/home.css";
 import Footer from "../components/footer";
-import { Link } from "react-router-dom"; // <-- import Link
+import { Link } from "react-router-dom"; // keep Link for SPA navigation
 
 export default function Home() {
   return (
@@ -19,23 +19,22 @@ export default function Home() {
             A community-driven platform where people share what they can and receive what they need.
             Food, clothes, books, gadgets, support — all in one place.
           </p>
+
           <div className="actions">
-
-            <a href="#donate" className="btn1">Post Donation</a>
-            <a href="/browse" className="btn2">Browse Donation</a>
-
+            {/* Route to Post Donation page */}
+            <Link to="/post" className="btn1">Post Donation</Link>
+            {/* Route to Browse page */}
+            <Link to="/browse" className="btn2">Browse Donation</Link>
           </div>
         </div>
 
         <div className="hero__right">
-          {/* Replace with your own image in /public/images/hero.jpg */}
+          {/* Replace with your own image in /public/images/hero.png */}
           <img src="/images/hero.png" alt="Helping hands" />
         </div>
       </section>
 
-
-      
-        {/* ===== STATS BAR ===== */}
+      {/* ===== STATS BAR ===== */}
       <section className="stats">
         <div className="stat">
           <div className="stat__num">200M</div>
@@ -50,7 +49,8 @@ export default function Home() {
           <div className="stat__label">Donations</div>
         </div>
       </section>
-        {/* ===== HOW IT WORKS ===== */}
+
+      {/* ===== HOW IT WORKS ===== */}
       <section className="how">
         <h2 className="section-title">How It Works</h2>
         <div className="how__grid">
@@ -79,12 +79,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-        {/* ===== TESTIMONIALS ===== */}
+
+      {/* ===== TESTIMONIALS ===== */}
       <section className="testimonials">
         <h2 className="section-title">What People Say About Us</h2>
         <div className="t-grid">
           <article className="t-card">
-            
             <p>
               I donated my old textbooks here. A week later, I got a message from a student who used
               them to pass his exams. Knowing something small made such a big difference felt incredible.
@@ -93,15 +93,14 @@ export default function Home() {
           </article>
 
           <article className="t-card">
-            
             <p>
               This isn’t just about giving or receiving; it’s about feeling connected. I met amazing
               people here, and every exchange feels like a small act of kindness multiplied.
             </p>
             <img className="t-avatar" src="/images/av-2.jpg" alt="Receiver" />
           </article>
+
           <article className="t-card">
-            
             <p>
               I donated my old textbooks here. A week later, I got a message from a student who used
               them to pass his exams. Knowing something small made such a big difference felt incredible.
@@ -110,24 +109,27 @@ export default function Home() {
           </article>
         </div>
       </section>
-        {/* ===== FINAL CTA (split) ===== */}
+
+      {/* ===== FINAL CTA (split) ===== */}
       <section id="donate" className="cta-split">
         <div className="cta__left">
           <span className="rule" />
           <h2>
-  Kindness Begins With <br/>
-  <span class="highlight">One Click</span>
-</h2>
+            Kindness Begins With <br />
+            <span className="highlight">One Click</span>
+          </h2>
 
-          <a href="#donate" className="btn3">Post Donation</a>
+          {/* Use Link here too so it routes to /post */}
+          <Link to="/post" className="btn3">Post Donation</Link>
         </div>
         <div className="cta__right">
           <img src="/images/cta.jpg" alt="Volunteers" />
         </div>
       </section>
-=======
 
       <Footer />
     </main>
   );
 }
+
+
