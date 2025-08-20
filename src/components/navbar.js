@@ -6,7 +6,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import { CgProfile } from "react-icons/cg"; // Profile icon
 import styles from '../css/myNav.module.css';
+import ProfilePage from '../pages/profile';
 
 const NavBarComponent = () => {
   return (
@@ -16,6 +18,7 @@ const NavBarComponent = () => {
         <Navbar.Brand as={Link} to="/">Warm Connect</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
+          
           {/* Links */}
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
@@ -29,7 +32,7 @@ const NavBarComponent = () => {
             </NavDropdown>
           </Nav>
 
-          {/* Login button using React Router Link */}
+          {/* Login button */}
           <Button
             as={Link}
             to="/login"
@@ -38,6 +41,18 @@ const NavBarComponent = () => {
           >
             Login
           </Button>
+
+          {/* Profile icon button */}
+          <Button
+            as={Link}
+            to="/profile"
+            variant="link"
+            className="ms-2 p-0"
+            style={{ fontSize: "1.8rem", color: "#000" }}
+          >
+            <CgProfile />
+          </Button>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

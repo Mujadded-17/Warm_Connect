@@ -1,0 +1,97 @@
+.profile-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #222;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-header h2 {
+  font-size: 1.8rem;
+  margin: 10px 0 4px;
+}
+
+.profile-header .location {
+  color: #888;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.profile-header .bio {
+  font-size: 1rem;
+  color: #555;
+}
+
+.profile-section {
+  margin-bottom: 40px;
+}
+
+.profile-section h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Table Styling */
+.donation-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.donation-table th, .donation-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.donation-table th {
+  background: #f9f9f9;
+  font-weight: 600;
+}
+
+.status-badge {
+  background: #e6f4ea;
+  color: #2e7d32;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+/* Contact info */
+.contact-item {
+  margin-bottom: 12px;
+}
+
+.contact-item strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.contact-item p {
+  margin: 0;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .donation-table th, .donation-table td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
