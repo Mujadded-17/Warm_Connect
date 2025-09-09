@@ -4,21 +4,24 @@ import '../css/Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/login', { email, password });
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      navigate('/profile');
+      const res = await axios.post('http://localhost:5000/api/register', { name, email, password });
+      setSuccess(res.data.message);
+      setError('');
+      navigate('/login');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      setError(err.response?.data?.message || 'Registration failed');
+      setSuccess('');
     }
   };
 
@@ -32,40 +35,46 @@ const Login = () => {
       </header>
 
       <div className="form-box">
-        <h2>Login</h2>
+        <h2>Register</h2>
 
         <form onSubmit={handleSubmit}>
           <div className="input-box">
-            <input 
-              type="email" 
-              placeholder="Email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required 
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
           <div className="input-box">
-            <input 
-              type="password" 
-              placeholder="Password" 
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-box">
+            <input
+              type="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required 
+              required
             />
           </div>
 
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
         </form>
 
+        {success && <p style={{ color: 'green' }}>{success}</p>}
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
-        <p className="forgot-password">
-          <Link to="/forgot-password">Forgot Password?</Link>
-        </p>
-
         <p className="toggle-message">
-          Don't have an account?{' '}
-          <Link to="/register" className="toggle-link">Register</Link>
+          Already have an account?{' '}
+          <Link to="/login" className="toggle-link">Login</Link>
         </p>
 
         <p className="browse-link">
@@ -76,4 +85,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

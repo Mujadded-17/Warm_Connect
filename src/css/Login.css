@@ -1,34 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-.wrapper {
-  width: 100%;
-  max-width: 380px;
-  padding: 30px 25px;
-  background-color: #e6a866; /* lightest orange background */
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  color: #000;
+* {
   box-sizing: border-box;
-  text-align: center;
-  margin: 50px auto;
-  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+html, body {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center;     /* horizontal center */
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Header */
 header {
-  margin-top: 40px;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 header h1 {
-  font-size: 2.8rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin: 0 0 5px;
   color: #d87c2b;
+  margin-bottom: 10px;
 }
 
 header .tagline {
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin: 0 0 25px;
+  font-size: 1.3rem;
   color: #8c4513;
 }
 
@@ -37,28 +45,33 @@ header .highlight {
   color: #7a3b00;
 }
 
+/* Form Box */
+.form-box {
+  background-color: #f1c698;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 450px; /* bigger max-width */
+}
+
 .form-box h2 {
   text-align: center;
   margin-bottom: 30px;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 2rem;
   color: #000;
 }
 
-/* Centering container for inputs and button */
-.form-box .input-box,
-.form-box button {
-  display: block;
-  width: 25%;       /* fixed width */
-  margin: 15px auto; /* centered */
+/* Inputs and buttons */
+.form-box .input-box {
+  margin-bottom: 20px;
 }
 
 .input-box input {
-  width: 100%;
-  padding: 12px 15px;
+  width: 100%; /* full width of container */
+  padding: 15px 20px;
+  font-size: 1rem;
   border-radius: 8px;
-  font-size: 16px;
-  font-weight: 400;
   border: 2.5px solid #d87c2b;
   outline: none;
   transition: border-color 0.3s ease;
@@ -69,13 +82,14 @@ header .highlight {
 }
 
 button {
-  padding: 12px;
-  background-color: #d87c2b;
-  color: #fff;
+  width: 100%; /* full width */
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
   border: none;
   border-radius: 8px;
-  font-size: 18px;
-  font-weight: 600;
+  background-color: #d87c2b;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -85,18 +99,17 @@ button:hover {
   transform: translateY(-2px);
 }
 
-.toggle-message {
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: #555;
+/* Toggle and browse links */
+.toggle-message, .browse-link, .forgot-password {
   text-align: center;
+  margin-top: 15px;
+  font-size: 0.95rem;
 }
 
 .toggle-link {
   color: #d87c2b;
   font-weight: 600;
   cursor: pointer;
-  user-select: none;
 }
 
 .toggle-link:hover {
@@ -104,21 +117,16 @@ button:hover {
   text-decoration: underline;
 }
 
-.browse-link {
-  margin-top: 25px;
-}
-
 .browse-link a {
-  display: block;
-  width: 25%;       /* fixed width */
-  padding: 12px 0;
+  display: inline-block;
+  width: auto;
+  padding: 12px 25px;
   background-color: #ffb194;
   border-radius: 8px;
-  color: black;
   font-weight: 600;
   text-decoration: none;
+  color: black;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  margin: 0 auto;   /* center */
 }
 
 .browse-link a:hover {
@@ -127,20 +135,32 @@ button:hover {
   transform: translateY(-2px);
 }
 
-/* Forgot Password Link */
-.forgot-password {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
 .forgot-password a {
   color: #d87c2b;
-  text-decoration: none;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .forgot-password a:hover {
   color: #7a3b00;
   text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .form-box {
+    padding: 30px 20px;
+  }
+  header h1 {
+    font-size: 2.5rem;
+  }
+  header .tagline {
+    font-size: 1.1rem;
+  }
+  .form-box h2 {
+    font-size: 1.7rem;
+  }
+  .browse-link a {
+    padding: 10px 20px;
+  }
 }
