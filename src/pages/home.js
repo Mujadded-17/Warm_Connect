@@ -3,6 +3,7 @@ import React from "react";
 import "../css/home.css";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom"; // keep Link for SPA navigation
+import ImpactStats from "../components/ImpactStats";
 
 export default function Home() {
   return (
@@ -35,20 +36,8 @@ export default function Home() {
       </section>
 
       {/* ===== STATS BAR ===== */}
-      <section className="stats">
-        <div className="stat">
-          <div className="stat__num">200M</div>
-          <div className="stat__label">Humans Impacted</div>
-        </div>
-        <div className="stat">
-          <div className="stat__num">50K+</div>
-          <div className="stat__label">Collaborations</div>
-        </div>
-        <div className="stat">
-          <div className="stat__num">370K+</div>
-          <div className="stat__label">Donations</div>
-        </div>
-      </section>
+       <ImpactStats />
+
 
       {/* ===== HOW IT WORKS ===== */}
       <section className="how">
