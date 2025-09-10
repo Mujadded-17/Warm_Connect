@@ -35,10 +35,6 @@
   color: #0f0f0f;
 }
 
-.post-form .input-box {
-  margin: 10px 0;
-}
-
 /* Grids */
 .grid-2 {
   display: grid;
@@ -63,6 +59,25 @@
   border-color: #7a3b00;
 }
 
+/* Bigger single address box (textarea) */
+.field textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: #fff;
+  border: 2px solid #d87c2b;
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.4;
+  min-height: 96px;         /* slightly bigger than inputs */
+  outline: none;
+  transition: border-color .25s ease;
+  box-sizing: border-box;
+  resize: none;             /* keep it neat; remove if you want drag-resize */
+}
+.field textarea:focus {
+  border-color: #7a3b00;
+}
+
 /* Small helper text under inputs */
 .hint {
   display: block;
@@ -73,6 +88,7 @@
 
 /* Your existing styles kept for donation fields */
 .post-form .input-box { margin: 14px 0; }
+
 .post-form select {
   width: 100%;
   padding: 12px 14px;
