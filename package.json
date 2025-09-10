@@ -8,10 +8,9 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.11.0",
-<<<<<<< HEAD
-=======
+
     "bcrypt": "^6.0.0",
->>>>>>> origin/master
+
     "bootstrap": "^5.3.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
