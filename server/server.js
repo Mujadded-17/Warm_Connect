@@ -1,7 +1,7 @@
-// server/server.js
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -10,8 +10,12 @@ import statsRoutes from "./routes/stats.js";
 import authRoutes from "./routes/auth.js";
 import donationsRoutes from "./routes/donations.js"; // <— add this (we’ll create it below)
 
+import connectDb from "./db/connect.js";
+import authRoutes from "./routes/auth.js";
+import statsRoutes from "./routes/stats.js";
+
+
 dotenv.config();
-console.log("JWT_SECRET =", process.env.JWT_SECRET);
 
 const app = express();
 app.use(cors());
@@ -26,9 +30,14 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // <— im
 connectDb();
 
 // Routes
+
 app.use("/api/stats", statsRoutes);
 app.use("/api", authRoutes);
 app.use("/api/donations", donationsRoutes); // <— new
+
+app.use("/api", authRoutes);
+app.use("/api/stats", statsRoutes);
+
 
 // Test route
 app.get("/", (req, res) => res.send("Backend is running ✅"));

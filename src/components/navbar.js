@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg"; // Profile icon
 import styles from '../css/myNav.module.css';
-import ProfilePage from '../pages/profile';
 
 const NavBarComponent = () => {
   return (
@@ -18,11 +17,11 @@ const NavBarComponent = () => {
         <Navbar.Brand as={Link} to="/">Warm Connect</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          
+
           {/* Links */}
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link href="#link">About</Nav.Link>
+            <Nav.Link as={Link} to="/about">About</Nav.Link> {/* Correct About link */}
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
