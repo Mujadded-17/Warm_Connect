@@ -3,18 +3,12 @@ import "../css/post.css";
 
 export default function Post() {
   const [form, setForm] = useState({
-    // NEW contact fields
     firstName: "",
     lastName: "",
     phone: "",
     email: "",
-    street: "",
-    street2: "",
-    city: "",
-    state: "",
-    zip: "",
-
-    // Existing donation fields
+    // REPLACE multiple address fields with a single one
+    address: "",
     title: "",
     category: "",
     image: null,
@@ -97,65 +91,20 @@ export default function Post() {
           {/* ---------- Address ---------- */}
           <div className="section">
             <div className="section-title">Address</div>
-
             <div className="field">
-              <input
-                type="text"
-                name="street"
-                placeholder="Street Address"
-                value={form.street}
+              <textarea
+                name="address"
+                placeholder="Enter full address"
+                value={form.address}
                 onChange={handleChange}
+                rows={3}
+                style={{ resize: "none" }}
               />
-              <small className="hint">Street Address</small>
-            </div>
-
-            <div className="field">
-              <input
-                type="text"
-                name="street2"
-                placeholder="Street Address Line 2"
-                value={form.street2}
-                onChange={handleChange}
-              />
-              <small className="hint">Street Address Line 2</small>
-            </div>
-
-            <div className="grid-2">
-              <div className="field">
-                <input
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                  value={form.city}
-                  onChange={handleChange}
-                />
-                <small className="hint">City</small>
-              </div>
-              <div className="field">
-                <input
-                  type="text"
-                  name="state"
-                  placeholder="State / Province"
-                  value={form.state}
-                  onChange={handleChange}
-                />
-                <small className="hint">State / Province</small>
-              </div>
-            </div>
-
-            <div className="field">
-              <input
-                type="text"
-                name="zip"
-                placeholder="Postal / Zip Code"
-                value={form.zip}
-                onChange={handleChange}
-              />
-              <small className="hint">Postal / Zip Code</small>
+              <small className="hint">Full address</small>
             </div>
           </div>
 
-          {/* ---------- Your Existing Donation Fields (unchanged text) ---------- */}
+          {/* ---------- Donation Fields ---------- */}
           <div className="section">
             <div className="input-box">
               <input
@@ -196,8 +145,8 @@ export default function Post() {
                   value="pickup"
                   checked={form.option === "pickup"}
                   onChange={handleChange}
-                />
-                {" "}Pickup
+                />{" "}
+                Pickup
               </label>
               {" "}
               <label>
@@ -207,13 +156,15 @@ export default function Post() {
                   value="delivery"
                   checked={form.option === "delivery"}
                   onChange={handleChange}
-                />
-                {" "}Delivery
+                />{" "}
+                Delivery
               </label>
             </div>
           </div>
 
-          <button type="submit" className="submit-btn">Submit Donation</button>
+          <button type="submit" className="submit-btn">
+            Submit Donation
+          </button>
         </form>
       </div>
     </section>
