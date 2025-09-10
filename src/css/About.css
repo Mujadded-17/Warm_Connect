@@ -1,0 +1,39 @@
+.about-wrapper {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.about-header h1 {
+  font-size: 2.5rem;
+  color: #e07b39; /* brownish-orange theme */
+}
+
+.about-content h2 {
+  margin-top: 25px;
+  color: #e07b39;
+}
+
+.about-content p {
+  margin-top: 10px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.highlight {
+  color: #e07b39;
+  font-weight: bold;
+}
+
+.motto {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  text-align: center;
+}
