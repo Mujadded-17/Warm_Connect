@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/Login.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -33,7 +32,6 @@ const Login = () => {
 
       <div className="form-box">
         <h2>Login</h2>
-
         <form onSubmit={handleSubmit}>
           <div className="input-box">
             <input 
@@ -53,7 +51,6 @@ const Login = () => {
               required 
             />
           </div>
-
           <button type="submit">Login</button>
         </form>
 
