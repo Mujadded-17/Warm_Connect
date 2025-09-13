@@ -11,6 +11,20 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
+    // Password validation
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return;
+    }
+
     try {
       const res = await axios.post('http://localhost:5000/api/login', { email, password });
       localStorage.setItem('token', res.data.token);
@@ -34,21 +48,21 @@ const Login = () => {
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-box">
-            <input 
-              type="email" 
-              placeholder="Email" 
+            <input
+              type="email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required 
+              required
             />
           </div>
           <div className="input-box">
-            <input 
-              type="password" 
-              placeholder="Password" 
+            <input
+              type="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required 
+              required
             />
           </div>
           <button type="submit">Login</button>
@@ -61,8 +75,7 @@ const Login = () => {
         </p>
 
         <p className="toggle-message">
-          Don't have an account?{' '}
-          <Link to="/register" className="toggle-link">Register</Link>
+          Don't have an account? <Link to="/register" className="toggle-link">Register</Link>
         </p>
 
         <p className="browse-link">

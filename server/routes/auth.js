@@ -6,12 +6,38 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
+// ===== HELPER FUNCTIONS =====
+const validateEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
+
+const validateName = (name) => {
+  const regex = /^[A-Za-z]+(\s[A-Za-z]+)*$/; // letters + middle spaces only
+  return regex.test(name);
+};
+
+const validatePassword = (password) => {
+  const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/; // min 6 chars, letters + numbers
+  return regex.test(password);
+};
+
 // ===== REGISTER =====
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
+
     if (!name || !email || !password)
       return res.status(400).json({ message: "All fields are required" });
+
+    if (!validateName(name))
+      return res.status(400).json({ message: "Name must contain only letters and spaces" });
+
+    if (!validateEmail(email))
+      return res.status(400).json({ message: "Invalid email format" });
+
+    if (!validatePassword(password))
+      return res.status(400).json({ message: "Password must be at least 6 characters long and include letters and numbers" });
 
     const existingUser = await User.findOne({ email });
     if (existingUser)
@@ -32,6 +58,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+
     if (!email || !password)
       return res.status(400).json({ message: "All fields are required" });
 
@@ -81,6 +108,9 @@ router.post("/reset-password/:token", async (req, res) => {
   try {
     const { token } = req.params;
     const { password } = req.body;
+
+    if (!validatePassword(password))
+      return res.status(400).json({ message: "Password must be at least 6 characters long and include letters and numbers" });
 
     const user = await User.findOne({
       resetToken: token,
