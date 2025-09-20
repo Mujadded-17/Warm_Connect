@@ -14,8 +14,8 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Name validation: letters and spaces only
-    const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+    // Name validation
+    const nameRegex = /^[a-zA-Z]+( [a-zA-Z]+)*$/;
     if (!nameRegex.test(name)) {
       setError('Name can only contain letters and spaces');
       return;
@@ -24,14 +24,14 @@ const Register = () => {
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError('Please enter a valid email address');
+      setError('Please enter a valid email');
       return;
     }
 
-    // Password validation: letters + numbers, min 6 chars
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    // Password validation (min 8 chars, letters + digits)
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (!passwordRegex.test(password)) {
-      setError('Password must be at least 6 characters and include letters and numbers');
+      setError('Password must be at least 8 characters and include letters and numbers');
       return;
     }
 
@@ -92,7 +92,8 @@ const Register = () => {
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
         <p className="toggle-message">
-          Already have an account? <Link to="/login" className="toggle-link">Login</Link>
+          Already have an account?{' '}
+          <Link to="/login" className="toggle-link">Login</Link>
         </p>
 
         <p className="browse-link">

@@ -2,42 +2,28 @@ import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+import nodemailer from "nodemailer";
 import User from "../models/User.js";
 
 const router = express.Router();
 
-// ===== HELPER FUNCTIONS =====
-const validateEmail = (email) => {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-};
-
-const validateName = (name) => {
-  const regex = /^[A-Za-z]+(\s[A-Za-z]+)*$/; // letters + middle spaces only
-  return regex.test(name);
-};
-
-const validatePassword = (password) => {
-  const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/; // min 6 chars, letters + numbers
-  return regex.test(password);
-};
+// NodeMailer transporter using .env credentials
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
+  secure: false, // false for port 587
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 // ===== REGISTER =====
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
     if (!name || !email || !password)
       return res.status(400).json({ message: "All fields are required" });
-
-    if (!validateName(name))
-      return res.status(400).json({ message: "Name must contain only letters and spaces" });
-
-    if (!validateEmail(email))
-      return res.status(400).json({ message: "Invalid email format" });
-
-    if (!validatePassword(password))
-      return res.status(400).json({ message: "Password must be at least 6 characters long and include letters and numbers" });
 
     const existingUser = await User.findOne({ email });
     if (existingUser)
@@ -58,7 +44,6 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
     if (!email || !password)
       return res.status(400).json({ message: "All fields are required" });
 
@@ -89,16 +74,33 @@ router.post("/forgot-password", async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const resetToken = crypto.randomBytes(20).toString("hex");
+    // Generate reset token
+    const resetToken = crypto.randomBytes(32).toString("hex");
     user.resetToken = resetToken;
     user.resetTokenExpiration = Date.now() + 3600000; // 1 hour
     await user.save();
 
-    console.log(`Password reset token for ${email}: ${resetToken}`);
+    // Email content
+    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`; // frontend reset page
+    const mailOptions = {
+      from: `"WarmConnect" <${process.env.EMAIL_USER}>`,
+      to: user.email,
+      subject: "Password Reset Request",
+      html: `
+        <p>Hi ${user.name},</p>
+        <p>You requested a password reset. Click the link below to set a new password:</p>
+        <a href="${resetUrl}">${resetUrl}</a>
+        <p>This link will expire in 1 hour.</p>
+        <p>If you did not request this, you can safely ignore this email.</p>
+      `,
+    };
 
-    res.json({ message: "Password reset link sent (check server console in dev)" });
+    // Send email
+    await transporter.sendMail(mailOptions);
+
+    res.json({ message: "Password reset email sent successfully. Check your inbox!" });
   } catch (error) {
-    console.error("Forgot Password error:", error.message);
+    console.error("Forgot Password error:", error); // <- full error
     res.status(500).json({ message: "Server error during password reset" });
   }
 });
@@ -109,12 +111,9 @@ router.post("/reset-password/:token", async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
 
-    if (!validatePassword(password))
-      return res.status(400).json({ message: "Password must be at least 6 characters long and include letters and numbers" });
-
     const user = await User.findOne({
       resetToken: token,
-      resetTokenExpiration: { $gt: Date.now() }
+      resetTokenExpiration: { $gt: Date.now() },
     });
 
     if (!user) return res.status(400).json({ message: "Invalid or expired token" });
@@ -127,7 +126,7 @@ router.post("/reset-password/:token", async (req, res) => {
 
     res.json({ message: "Password has been reset successfully" });
   } catch (error) {
-    console.error("Reset Password error:", error.message);
+    console.error("Forgot Password error:", error);
     res.status(500).json({ message: "Server error during password reset" });
   }
 });

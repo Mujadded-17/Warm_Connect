@@ -4,19 +4,27 @@ import "../css/Login.css";
 import axios from "axios";
 
 const ResetPassword = () => {
-  const { token } = useParams();
+  const { token } = useParams(); // get token from URL
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // optional confirm field
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setMessage("");
+      return;
+    }
+
     try {
       const res = await axios.post(`http://localhost:5000/api/reset-password/${token}`, { password });
-      setMessage(res.data.message);
+      setMessage(res.data.message); // show backend success message
       setError("");
-      setTimeout(() => navigate("/login"), 2000);
+      setTimeout(() => navigate("/login"), 2000); // redirect after 2 sec
     } catch (err) {
       setError(err.response?.data?.message || "Failed to reset password");
       setMessage("");
@@ -44,8 +52,18 @@ const ResetPassword = () => {
               required
             />
           </div>
+          <div className="input-box">
+            <input
+              type="password"
+              placeholder="Confirm new password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
           <button type="submit">Reset Password</button>
         </form>
+
         {message && <p style={{ color: "green" }}>{message}</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
