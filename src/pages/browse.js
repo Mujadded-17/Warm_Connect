@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../css/browse.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import "../css/browse.css";
 
-// Import images
+// Static category images
 import clothesImg from '../images/clothes.jpeg';
 import furnitureImg from '../images/furniture.jpeg';
 import stationaryImg from '../images/stationary.jpeg';
@@ -22,52 +23,123 @@ const categories = [
 ];
 
 export default function Browse() {
+  const [donations, setDonations] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [viewingItems, setViewingItems] = useState(false);
 
+  // Fetch all donations
+  useEffect(() => {
+    const fetchDonations = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/donations");
+        if (res.data.ok) setDonations(res.data.donation || []);
+      } catch (err) {
+        console.error("Error fetching donations:", err);
+      }
+    };
+    fetchDonations();
+  }, []);
+
+  // Filter categories by search/dropdown
   const filteredCategories = categories.filter(cat =>
     cat.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
     (selectedCategory === '' || cat.name === selectedCategory)
   );
 
+  // Donations for selected category
+  const selectedDonations = donations.filter(d => d.category === selectedCategory);
+
   return (
     <div className="browse-container">
       <h2>Explore Categories</h2>
 
-      <div className="filters">
-        <input
-          type="text"
-          placeholder="Search category..."
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-        />
-        <select
-          value={selectedCategory}
-          onChange={e => setSelectedCategory(e.target.value)}
-        >
-          <option value="">All Categories</option>
-          {categories.map(cat => (
-            <option key={cat.id} value={cat.name}>{cat.name}</option>
-          ))}
-        </select>
-      </div>
+      {!viewingItems && (
+        <>
+          <div className="filters">
+            <input
+              type="text"
+              placeholder="Search category..."
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+            />
+            <select
+              value={selectedCategory}
+              onChange={e => setSelectedCategory(e.target.value)}
+            >
+              <option value="">All Categories</option>
+              {categories.map(cat => (
+                <option key={cat.id} value={cat.name}>{cat.name}</option>
+              ))}
+            </select>
+          </div>
 
-      <div className="item-list">
-        {filteredCategories.length > 0 ? (
-          filteredCategories.map(cat => (
-            <div key={cat.id} className="item-card">
-              <img src={cat.img} alt={cat.name} />
-              <div className="overlay">{cat.name}</div>
-            </div>
-          ))
-        ) : (
-          <p>No categories match your search.</p>
-        )}
-      </div>
+          <div className="item-list">
+            {filteredCategories.length > 0 ? (
+              filteredCategories.map(cat => {
+                const catDonations = donations.filter(d => d.category === cat.name);
 
-      <Link to="/" className="back-btn">
-        Back to Home
-      </Link>
+                return (
+                  <div
+                    key={cat.id}
+                    className="item-card"
+                    onClick={() => {
+                      setSelectedCategory(cat.name);
+                      setViewingItems(true);
+                    }}
+                  >
+                    <img src={cat.img} alt={cat.name} />
+                    <div className="overlay">
+                      <strong>{cat.name}</strong>
+                      <br />
+                      {catDonations.length > 0 ? (
+                        <span>{catDonations.length} item(s) available</span>
+                      ) : (
+                        <span>No items</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p>No categories match your search.</p>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* Display donations for selected category */}
+      {viewingItems && (
+        <div>
+          <h2>{selectedCategory} Donations</h2>
+          <div className="item-list">
+            {selectedDonations.length > 0 ? (
+              selectedDonations.map(d => (
+                <div key={d._id} className="item-card">
+                  <img src={`http://localhost:5000/${d.image}`} alt={d.title} />
+                  <div className="overlay">
+                    <strong>{d.title}</strong>
+                    <br />
+                    {d.firstName} {d.lastName}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No items in this category yet.</p>
+            )}
+          </div>
+
+          <button className="back-btn" onClick={() => setViewingItems(false)}>
+            Back to Categories
+          </button>
+        </div>
+      )}
+
+      {!viewingItems && (
+        <Link to="/" className="back-btn">
+          Back to Home
+        </Link>
+      )}
     </div>
   );
 }
