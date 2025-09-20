@@ -1,21 +1,32 @@
-import React, { useState } from "react";
-import "../css/Login.css";
-import axios from "axios";
+// src/pages/ForgotPassword.js
+import React, { useState } from 'react';
+import '../css/Login.css';
+import axios from 'axios';
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address');
+      setMessage('');
+      return;
+    }
+
     try {
-      const res = await axios.post("http://localhost:5000/api/forgot-password", { email });
-      setMessage(res.data.message + " (check server console in dev)");
-      setError("");
+      const res = await axios.post('http://localhost:5000/api/forgot-password', { email });
+      setMessage(res.data.message); // Success message from backend
+      setError('');
     } catch (err) {
-      setError(err.response?.data?.message || "Error sending reset link");
-      setMessage("");
+      setError(err.response?.data?.message || 'Failed to send reset link');
+      setMessage('');
     }
   };
 
@@ -42,8 +53,9 @@ const ForgotPassword = () => {
           </div>
           <button type="submit">Send Reset Link</button>
         </form>
-        {message && <p style={{ color: "green" }}>{message}</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        {message && <p style={{ color: 'green' }}>{message}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
     </div>
   );

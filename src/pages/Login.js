@@ -9,8 +9,16 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!emailRegex.test(email)) {
+      setError("Invalid email format");
+      return;
+    }
+
     try {
       const res = await axios.post('http://localhost:5000/api/login', { email, password });
       localStorage.setItem('token', res.data.token);

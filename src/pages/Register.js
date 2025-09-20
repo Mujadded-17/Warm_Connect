@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/Login.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -14,6 +13,28 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Name validation
+    const nameRegex = /^[a-zA-Z]+( [a-zA-Z]+)*$/;
+    if (!nameRegex.test(name)) {
+      setError('Name can only contain letters and spaces');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email');
+      return;
+    }
+
+    // Password validation (min 8 chars, letters + digits)
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      setError('Password must be at least 8 characters and include letters and numbers');
+      return;
+    }
+
     try {
       const res = await axios.post('http://localhost:5000/api/register', { name, email, password });
       setSuccess(res.data.message);
@@ -36,7 +57,6 @@ const Register = () => {
 
       <div className="form-box">
         <h2>Register</h2>
-
         <form onSubmit={handleSubmit}>
           <div className="input-box">
             <input
@@ -65,7 +85,6 @@ const Register = () => {
               required
             />
           </div>
-
           <button type="submit">Register</button>
         </form>
 
