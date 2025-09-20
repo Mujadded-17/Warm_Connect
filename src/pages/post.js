@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import axios from "axios";
 import "../css/post.css";
 
 export default function Post() {
@@ -7,13 +8,14 @@ export default function Post() {
     lastName: "",
     phone: "",
     email: "",
-    // REPLACE multiple address fields with a single one
-    address: "",
+    address: "",          // single full address
     title: "",
     category: "",
-    image: null,
+    image: null,          // File object
     option: "pickup",
   });
+  const [submitting, setSubmitting] = useState(false);
+  const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -23,10 +25,51 @@ export default function Post() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Donation submitted:", form);
-    alert("Thank you! Your donation has been posted.");
+    setSubmitting(true);
+
+    try {
+      const data = new FormData();
+      // append fields (skip image if null)
+      Object.keys(form).forEach((key) => {
+        if (key === "image") {
+          if (form.image) data.append("image", form.image);
+        } else {
+          data.append(key, form[key]);
+        }
+      });
+
+      const res = await axios.post(
+        "http://localhost:5000/api/donations",
+        data,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      console.log("Server response:", res.data);
+      alert("✅ Donation submitted successfully!");
+
+      // Reset form
+      setForm({
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        address: "",
+        title: "",
+        category: "",
+        image: null,
+        option: "pickup",
+      });
+
+      // Clear the file input visually
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    } catch (error) {
+      console.error("Error submitting donation:", error);
+      alert("❌ Failed to submit donation");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -34,7 +77,7 @@ export default function Post() {
       <div className="post-container">
         <h2>Post a Donation</h2>
 
-        <form className="post-form" onSubmit={handleSubmit}>
+        <form className="post-form" onSubmit={handleSubmit} encType="multipart/form-data">
           {/* ---------- Name ---------- */}
           <div className="section">
             <div className="section-title">Name</div>
@@ -94,7 +137,7 @@ export default function Post() {
             <div className="field">
               <textarea
                 name="address"
-                placeholder="Enter full address"
+                placeholder="Enter your full address"
                 value={form.address}
                 onChange={handleChange}
                 rows={3}
@@ -104,7 +147,7 @@ export default function Post() {
             </div>
           </div>
 
-          {/* ---------- Donation Fields ---------- */}
+          {/* ---------- Donation Details ---------- */}
           <div className="section">
             <div className="input-box">
               <input
@@ -134,7 +177,14 @@ export default function Post() {
             </div>
 
             <div className="input-box">
-              <input type="file" name="image" onChange={handleChange} required />
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleChange}
+                ref={fileInputRef}
+                required
+              />
             </div>
 
             <div className="input-box">
@@ -147,8 +197,7 @@ export default function Post() {
                   onChange={handleChange}
                 />{" "}
                 Pickup
-              </label>
-              {" "}
+              </label>{" "}
               <label>
                 <input
                   type="radio"
@@ -162,8 +211,8 @@ export default function Post() {
             </div>
           </div>
 
-          <button type="submit" className="submit-btn">
-            Submit Donation
+          <button type="submit" className="submit-btn" disabled={submitting}>
+            {submitting ? "Submitting..." : "Submit Donation"}
           </button>
         </form>
       </div>
