@@ -1,112 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-/* Wrapper (no background color here) */
 .post-section {
   width: 100%;
   padding: 80px 16px;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Peach card */
 .post-container {
-  max-width: 720px;           /* wider to fit two-column sections */
+  max-width: 720px;
   margin: 0 auto;
   padding: 30px;
-  background: #ffb194;        /* your peach color */
+  background: #ffb194;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  text-align: left;           /* left-align for form sections */
-  font-family: 'Poppins', sans-serif;
+  text-align: left;
 }
 
 .post-container h2 {
   color: #c25a19;
-  margin: 0 0 20px;
+  margin-bottom: 25px;
   font-size: 1.9rem;
   font-weight: 700;
-  text-align: center;         /* keep main heading centered */
+  text-align: center;
 }
 
-/* Section blocks */
-.section { margin-bottom: 22px; }
-.section-title {
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #d87c2b;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color .25s ease;
+}
+
+.input-field:focus {
+  border-color: #7a3b00;
+}
+
+.post-form .grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.post-form .section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-form .section-title {
   font-weight: 700;
-  margin-bottom: 10px;
   color: #0f0f0f;
 }
 
-/* Grids */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+.post-form label {
+  font-size: 14px;
+  margin-right: 12px;
+  cursor: pointer;
 }
 
-/* Fields */
-.field { display: block; }
-.field input {
-  width: 100%;
-  padding: 12px 14px;
-  background: #fff;
-  border: 2px solid #d87c2b;
-  border-radius: 8px;
-  font-size: 15px;
-  outline: none;
-  transition: border-color .25s ease;
-  box-sizing: border-box;
-}
-.field input:focus {
-  border-color: #7a3b00;
-}
-
-/* Bigger single address box (textarea) */
-.field textarea {
-  width: 100%;
-  padding: 14px 16px;
-  background: #fff;
-  border: 2px solid #d87c2b;
-  border-radius: 8px;
-  font-size: 15px;
-  line-height: 1.4;
-  min-height: 96px;         /* slightly bigger than inputs */
-  outline: none;
-  transition: border-color .25s ease;
-  box-sizing: border-box;
-  resize: none;             /* keep it neat; remove if you want drag-resize */
-}
-.field textarea:focus {
-  border-color: #7a3b00;
-}
-
-/* Small helper text under inputs */
-.hint {
-  display: block;
-  font-size: 12px;
-  color: #555;
-  margin-top: 6px;
-}
-
-/* Your existing styles kept for donation fields */
-.post-form .input-box { margin: 14px 0; }
-
-.post-form select {
-  width: 100%;
-  padding: 12px 14px;
-  background: #fff;
-  border: 2px solid #d87c2b;
-  border-radius: 8px;
-  font-size: 15px;
-  outline: none;
-  transition: border-color .25s ease;
-  box-sizing: border-box;
-}
-.post-form select:focus { border-color: #7a3b00; }
-
-.post-form .input-box label { margin-right: 15px; font-size: 14px; }
-
-/* Submit */
 .submit-btn {
-  width: 100%;
   padding: 12px;
   background-color: #d87c2b;
   color: #fff;
@@ -116,16 +79,15 @@
   font-weight: 700;
   cursor: pointer;
   transition: background .25s ease, transform .2s ease;
-  margin-top: 6px;
 }
+
 .submit-btn:hover {
   background-color: #7a3b00;
   transform: translateY(-2px);
 }
 
-/* Responsive */
 @media (max-width: 700px) {
-  .grid-2 { grid-template-columns: 1fr; }
-  .post-container { padding: 24px; }
-  .post-section { padding: 60px 16px; }
+  .post-form .grid-2 {
+    grid-template-columns: 1fr;
+  }
 }

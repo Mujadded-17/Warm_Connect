@@ -8,6 +8,7 @@ import Browse from './pages/browse';
 import Post from './pages/post';
 import About from './pages/About';
 import ForgotPassword from './pages/ForgotPassword';
+import DonationDetail from './pages/DonationDetail';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
         <Route path="/browse" element={<Browse />} />
         <Route path="/post" element={<Post />} />
         <Route path="/about" element={<About />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} /> {/* Added route */}
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/donation/:id" element={<DonationDetail />} /> {/* NEW DETAIL PAGE ROUTE */}
       </Routes>
     </Router>
   );

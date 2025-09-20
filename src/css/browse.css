@@ -19,7 +19,7 @@
   justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
-  margin-bottom: 40px; /* spacing after search bar */
+  margin-bottom: 40px;
 }
 
 .filters input,
@@ -32,20 +32,20 @@
 }
 
 .filters select {
-  padding: 10px 35px 10px 14px; /* space for arrow */
-  appearance: none; /* remove default arrow */
+  padding: 10px 35px 10px 14px;
+  appearance: none;
   background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23333' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E") no-repeat right 10px center;
   background-size: 10px 6px;
 }
 
-/* Grid of categories */
+/* Grid of categories & donations */
 .item-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  grid-template-columns: repeat(4, 1fr);
   gap: 25px;
 }
 
-/* Category card */
+/* Category & donation card */
 .item-card {
   position: relative;
   border-radius: 15px;
@@ -67,7 +67,7 @@
   transform: scale(1.1);
 }
 
-/* Overlay for category name */
+/* Overlay for category/donation names */
 .overlay {
   position: absolute;
   bottom: 0;
@@ -77,13 +77,17 @@
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
   transition: background 0.3s;
 }
 
-.item-card:hover .overlay {
-  background: rgba(0, 0, 0, 0.7);
+.overlay strong {
+  font-size: 1.05rem;
+}
+
+.viewing-items .item-card .overlay strong {
+  font-size: 0.95rem; /* smaller donation title */
 }
 
 /* Back button */
@@ -104,6 +108,27 @@
   transform: translateY(-2px);
 }
 
+.category-title {
+  color: #d87c2b; /* accent color */
+  font-size: 1.8rem; /* slightly smaller than main heading */
+  font-weight: 600;
+}
+
+/* Donation item titles overlay */
+.item-card .overlay strong {
+  font-size: 0.95rem; /* smaller than category title */
+}
+
+
+/* No items message styling */
+.no-items {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  grid-column: 1 / -1; /* span all columns */
+  margin-top: 20px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .browse-container h2 {
@@ -115,10 +140,10 @@
   }
 
   .overlay {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .item-list {
-    grid-template-columns: repeat(2, 1fr); /* 2 items per row on small screens */
+    grid-template-columns: repeat(2, 1fr);
   }
 }

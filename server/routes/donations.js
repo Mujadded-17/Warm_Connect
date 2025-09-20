@@ -4,12 +4,19 @@ import upload from "../middleware/upload.js";
 
 const router = express.Router();
 
-// Create a donation
+// ------------------- CREATE DONATION -------------------
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     const {
-      firstName, lastName, phone, email,
-      address, title, category, option,
+      firstName,
+      lastName,
+      phone,
+      email,
+      address,
+      title,
+      category,
+      option,
+      description,
     } = req.body;
 
     const imagePath = req.file ? `uploads/${req.file.filename}` : undefined;
@@ -23,6 +30,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       title,
       category,
       option,
+      description,
       image: imagePath,
     });
 
@@ -33,7 +41,7 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-// GET all donations
+// ------------------- GET ALL DONATIONS -------------------
 router.get("/", async (req, res) => {
   try {
     const donations = await Donation.find().sort({ createdAt: -1 });
@@ -44,7 +52,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET donations by category
+// ------------------- GET DONATIONS BY CATEGORY -------------------
 router.get("/category/:categoryName", async (req, res) => {
   try {
     const { categoryName } = req.params;
@@ -52,6 +60,19 @@ router.get("/category/:categoryName", async (req, res) => {
     res.json({ ok: true, donation: donations });
   } catch (err) {
     console.error("Fetch category donations error:", err);
+    res.status(500).json({ ok: false, message: "Server error" });
+  }
+});
+
+// ------------------- GET DONATION BY ID -------------------
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const donation = await Donation.findById(id);
+    if (!donation) return res.status(404).json({ ok: false, message: "Donation not found" });
+    res.json({ ok: true, donation });
+  } catch (err) {
+    console.error("Fetch donation by ID error:", err);
     res.status(500).json({ ok: false, message: "Server error" });
   }
 });

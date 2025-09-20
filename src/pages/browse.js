@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/browse.css";
 
-// Static category images
+// Category images
 import clothesImg from '../images/clothes.jpeg';
 import furnitureImg from '../images/furniture.jpeg';
 import stationaryImg from '../images/stationary.jpeg';
@@ -27,8 +27,8 @@ export default function Browse() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [viewingItems, setViewingItems] = useState(false);
+  const navigate = useNavigate();
 
-  // Fetch all donations
   useEffect(() => {
     const fetchDonations = async () => {
       try {
@@ -41,13 +41,10 @@ export default function Browse() {
     fetchDonations();
   }, []);
 
-  // Filter categories by search/dropdown
   const filteredCategories = categories.filter(cat =>
-    cat.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedCategory === '' || cat.name === selectedCategory)
+    cat.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Donations for selected category
   const selectedDonations = donations.filter(d => d.category === selectedCategory);
 
   return (
@@ -65,7 +62,10 @@ export default function Browse() {
             />
             <select
               value={selectedCategory}
-              onChange={e => setSelectedCategory(e.target.value)}
+              onChange={e => {
+                setSelectedCategory(e.target.value);
+                if (e.target.value) setViewingItems(true);
+              }}
             >
               <option value="">All Categories</option>
               {categories.map(cat => (
@@ -108,14 +108,20 @@ export default function Browse() {
         </>
       )}
 
-      {/* Display donations for selected category */}
       {viewingItems && (
         <div>
-          <h2>{selectedCategory} Donations</h2>
-          <div className="item-list">
+          <h2>
+            <span className="category-title">{selectedCategory} Donations</span>
+          </h2>
+
+          <div className="item-list viewing-items">
             {selectedDonations.length > 0 ? (
               selectedDonations.map(d => (
-                <div key={d._id} className="item-card">
+                <div
+                  key={d._id}
+                  className="item-card"
+                  onClick={() => navigate(`/donation/${d._id}`)} // navigate to detail
+                >
                   <img src={`http://localhost:5000/${d.image}`} alt={d.title} />
                   <div className="overlay">
                     <strong>{d.title}</strong>
@@ -125,7 +131,7 @@ export default function Browse() {
                 </div>
               ))
             ) : (
-              <p>No items in this category yet.</p>
+              <p className="no-items">No items in this category yet.</p>
             )}
           </div>
 
