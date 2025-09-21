@@ -1,15 +1,12 @@
-// src/pages/home.js
 import React from "react";
 import "../css/home.css";
 import Footer from "../components/footer";
-import { Link } from "react-router-dom"; // keep Link for SPA navigation
+import { Link } from "react-router-dom"; 
 import ImpactStats from "../components/ImpactStats";
 
 export default function Home() {
   return (
     <main className="wc-home">
-
-      {/* ===== HERO (split) ===== */}
       <section className="hero">
         <div className="hero__left">
           <h1 className="hero__title">
@@ -20,26 +17,18 @@ export default function Home() {
             A community-driven platform where people share what they can and receive what they need.
             Food, clothes, books, gadgets, support — all in one place.
           </p>
-
           <div className="actions">
-            {/* Route to Post Donation page */}
             <Link to="/post" className="btn1">Post Donation</Link>
-            {/* Route to Browse page */}
             <Link to="/browse" className="btn2">Browse Donation</Link>
           </div>
         </div>
-
         <div className="hero__right">
-          {/* Replace with your own image in /public/images/hero.png */}
           <img src="/images/hero.png" alt="Helping hands" />
         </div>
       </section>
 
-      {/* ===== STATS BAR ===== */}
-       <ImpactStats />
+      <ImpactStats />
 
-
-      {/* ===== HOW IT WORKS ===== */}
       <section className="how">
         <h2 className="section-title">How It Works</h2>
         <div className="how__grid">
@@ -70,7 +59,7 @@ export default function Home() {
       </section>
 
       {/* ===== TESTIMONIALS ===== */}
-      <section className="testimonials">
+      <section id="testimonials" className="testimonials">
         <h2 className="section-title">What People Say About Us</h2>
         <div className="t-grid">
           <article className="t-card">
@@ -80,7 +69,6 @@ export default function Home() {
             </p>
             <img className="t-avatar" src="/images/av-3.jpg" alt="Donor" />
           </article>
-
           <article className="t-card">
             <p>
               This isn’t just about giving or receiving; it’s about feeling connected. I met amazing
@@ -88,7 +76,6 @@ export default function Home() {
             </p>
             <img className="t-avatar" src="/images/av-2.jpg" alt="Receiver" />
           </article>
-
           <article className="t-card">
             <p>
               I donated my old textbooks here. A week later, I got a message from a student who used
@@ -99,7 +86,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== FINAL CTA (split) ===== */}
       <section id="donate" className="cta-split">
         <div className="cta__left">
           <span className="rule" />
@@ -107,8 +93,6 @@ export default function Home() {
             Kindness Begins With <br />
             <span className="highlight">One Click</span>
           </h2>
-
-          {/* Use Link here too so it routes to /post */}
           <Link to="/post" className="btn3">Post Donation</Link>
         </div>
         <div className="cta__right">
@@ -120,5 +104,3 @@ export default function Home() {
     </main>
   );
 }
-
-
