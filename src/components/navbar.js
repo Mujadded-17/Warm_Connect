@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { CgProfile } from "react-icons/cg"; // Profile icon
+import { CgProfile } from "react-icons/cg";
 import styles from '../css/myNav.module.css';
 
 const NavBarComponent = () => {
@@ -21,13 +21,13 @@ const NavBarComponent = () => {
           {/* Links */}
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/about">About</Nav.Link> {/* Correct About link */}
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            <Nav.Link as={Link} to="/about">About</Nav.Link>
+
+            {/* Updated Dropdown */}
+            <NavDropdown title="More" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/requests">Requests</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/stories">Stories</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/contact">Contact Us</NavDropdown.Item>
             </NavDropdown>
           </Nav>
 
@@ -41,7 +41,7 @@ const NavBarComponent = () => {
             Login
           </Button>
 
-          {/* Profile icon button */}
+          {/* Profile icon */}
           <Button
             as={Link}
             to="/profile"
