@@ -42,13 +42,16 @@ export default function Post() {
 
     try {
       const data = new FormData();
-      Object.keys(form).forEach((key) => {
-        if (key === "image") {
-          if (form.image) data.append("image", form.image);
-        } else {
-          data.append(key, form[key]);
-        }
-      });
+      data.append("firstName", form.firstName);
+      data.append("lastName", form.lastName);
+      data.append("phone", form.phone);
+      data.append("email", form.email);
+      data.append("address", form.address);
+      data.append("title", form.title);
+      data.append("description", form.description); // ✅ description included
+      data.append("category", form.category);
+      data.append("option", form.option);
+      if (form.image) data.append("image", form.image);
 
       const res = await axios.post(
         "http://localhost:5000/api/donations",
@@ -91,7 +94,6 @@ export default function Post() {
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
-          {/* Name */}
           <div className="section">
             <div className="section-title">Name</div>
             <div className="grid-2">
@@ -116,7 +118,6 @@ export default function Post() {
             </div>
           </div>
 
-          {/* Contact */}
           <div className="section grid-2">
             <input
               type="tel"
@@ -138,7 +139,6 @@ export default function Post() {
             />
           </div>
 
-          {/* Address */}
           <div className="section">
             <div className="section-title">Address</div>
             <textarea
@@ -152,7 +152,6 @@ export default function Post() {
             />
           </div>
 
-          {/* Donation Details */}
           <div className="section">
             <input
               type="text"
@@ -223,11 +222,7 @@ export default function Post() {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="submit-btn"
-            disabled={submitting}
-          >
+          <button type="submit" className="submit-btn" disabled={submitting}>
             {submitting ? "Submitting..." : "Submit Donation"}
           </button>
         </form>

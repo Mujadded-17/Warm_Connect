@@ -27,14 +27,13 @@ export default function DonationDetail() {
 
   return (
     <div className="donation-detail-container">
-      <h2>{donation.title}</h2>
-      <div className="donation-detail-content">
+      <div className="donation-detail-card">
         <img
           src={`http://localhost:5000/${donation.image}`}
           alt={donation.title}
-          className="donation-detail-image"
         />
         <div className="donation-info">
+          <h2>{donation.title}</h2>
           <p><strong>Description:</strong> {donation.description}</p>
           <p><strong>Donor:</strong> {donation.firstName} {donation.lastName}</p>
           <p><strong>Email:</strong> {donation.email}</p>
@@ -45,9 +44,11 @@ export default function DonationDetail() {
         </div>
       </div>
 
-      <Link to="/browse" className="back-btn">
-        Back to Browse
-      </Link>
+      <div className="back-btn-wrapper">
+        <Link to="/browse" className="back-btn">
+          Back to Browse
+        </Link>
+      </div>
     </div>
   );
 }
