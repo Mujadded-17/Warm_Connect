@@ -1,0 +1,92 @@
+.donation-detail-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* container centered */
+  background: linear-gradient(135deg, #fff8f0, #fef9f5);
+  border-radius: 15px;
+}
+
+.donation-detail-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* left-aligned text */
+  gap: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 850px;
+}
+
+.donation-detail-card img {
+  width: 100%;
+  max-width: 450px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.donation-info {
+  text-align: left;
+  width: 100%;
+}
+
+.donation-info h2 {
+  font-size: 2.2rem;
+  color: #d87c2b;
+  margin-bottom: 15px;
+}
+
+.donation-info p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+/* Back button outside card */
+.back-btn-wrapper {
+  width: 100%;
+  max-width: 850px;
+  margin-top: 15px;
+}
+
+.back-btn {
+  padding: 12px 30px;
+  background: #d87c2b;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.3s;
+  display: inline-block;
+}
+
+.back-btn:hover {
+  background: #7a3b00;
+  transform: translateY(-2px);
+}
+
+/* Desktop layout */
+@media (min-width: 700px) {
+  .donation-detail-card {
+    flex-direction: row;
+    gap: 30px;
+  }
+
+  .donation-detail-card img {
+    width: 45%;
+    margin-bottom: 0;
+  }
+
+  .donation-info {
+    width: 55%;
+    padding: 0;
+  }
+}
