@@ -1,27 +1,35 @@
 import React from "react";
 import "../css/contact.css";
+import Footer from "../components/footer"; // Import Footer
 
 export default function Contact() {
   const founders = [
     { name: "Silvia Alam", email: "silviaalam134@gmail.com" },
-    { name: "Mujadded Morshed Chowdhury", email: "mujadded@example.com" },
-    { name: "Samprity Haque", email: "samprity@example.com" },
-    { name: "Rubai Raihan", email: "rubai@example.com" },
+    { name: "Mujadded Morshed Chowdhury", email: "mujadded@gmail.com" },
+    { name: "Samprity Haque", email: "samprity@gmail.com" },
+    { name: "Rubai Raihan", email: "rubai@gmail.com" },
   ];
 
   return (
-    <div className="contact-container">
-      <h2>Contact Our Founders</h2>
-      <div className="founders-grid">
-        {founders.map((f, idx) => (
-          <div className="founder-card" key={idx}>
-            <h3>{f.name}</h3>
-            <p>
-              <a href={`mailto:${f.email}`}>{f.email}</a>
-            </p>
-          </div>
-        ))}
+    <>
+      <div className="contact-container">
+        <h2>For Any Help Contact With Us</h2>
+        <div className="founders-grid">
+          {founders.map((founder, index) => (
+            <div key={index} className="founder-card">
+              <div className="founder-img">
+                {/* Placeholder for image */}
+                <span>Image</span>
+              </div>
+              <h3>{founder.name}</h3>
+              <p>{founder.email}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Footer */}
+      <Footer />
+    </>
   );
 }
