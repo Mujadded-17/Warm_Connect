@@ -7,6 +7,7 @@ import ProfilePage from './pages/profile';
 import Browse from './pages/browse';
 import Post from './pages/post';
 import About from './pages/About';
+import Contact from './pages/Contact'; // ✅ Import Contact page
 import ForgotPassword from './pages/ForgotPassword';
 import DonationDetail from './pages/DonationDetail';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -23,8 +24,9 @@ function App() {
         <Route path="/browse" element={<Browse />} />
         <Route path="/post" element={<Post />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} /> {/* ✅ New Contact route */}
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/donation/:id" element={<DonationDetail />} /> {/* NEW DETAIL PAGE ROUTE */}
+        <Route path="/donation/:id" element={<DonationDetail />} /> {/* Donation Detail */}
       </Routes>
     </Router>
   );
