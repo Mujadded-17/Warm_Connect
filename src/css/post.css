@@ -11,14 +11,14 @@
   max-width: 720px;
   margin: 0 auto;
   padding: 30px;
-  background: #ffb194;
+  background: #ecac93;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
   text-align: left;
 }
 
 .post-container h2 {
-  color: #c25a19;
+  color: #b65417;
   margin-bottom: 25px;
   font-size: 1.9rem;
   font-weight: 700;
@@ -34,7 +34,7 @@
 .input-field {
   width: 100%;
   padding: 12px 14px;
-  border: 2px solid #d87c2b;
+  border: 2px solid #faf5f1;
   border-radius: 8px;
   font-size: 15px;
   outline: none;
@@ -71,7 +71,7 @@
 
 .submit-btn {
   padding: 12px;
-  background-color: #d87c2b;
+  background-color: #d8741b;
   color: #fff;
   border: none;
   border-radius: 8px;
