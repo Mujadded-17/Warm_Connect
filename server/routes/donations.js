@@ -1,12 +1,15 @@
-import express from "express";
+import express from "express"; 
 import Donation from "../models/Donation.js";
 import upload from "../middleware/upload.js";
 
 const router = express.Router();
 
-// ------------------- CREATE DONATION -------------------
+// CREATE DONATION
 router.post("/", upload.single("image"), async (req, res) => {
   try {
+    console.log("REQ BODY:", req.body);
+    console.log("REQ FILE:", req.file);
+
     const {
       firstName,
       lastName,
@@ -22,15 +25,15 @@ router.post("/", upload.single("image"), async (req, res) => {
     const imagePath = req.file ? `uploads/${req.file.filename}` : undefined;
 
     const donation = await Donation.create({
-      firstName,
-      lastName,
-      phone,
-      email,
-      address,
-      title,
-      category,
-      option,
-      description,
+      firstName: firstName || "",
+      lastName: lastName || "",
+      phone: phone || "",
+      email: email || "",
+      address: address || "",
+      title: title || "",
+      category: category || "",
+      option: option || "pickup",
+      description: description || "", // ✅ fixed
       image: imagePath,
     });
 
@@ -41,7 +44,7 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-// ------------------- GET ALL DONATIONS -------------------
+// GET ALL DONATIONS
 router.get("/", async (req, res) => {
   try {
     const donations = await Donation.find().sort({ createdAt: -1 });
@@ -52,19 +55,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ------------------- GET DONATIONS BY CATEGORY -------------------
-router.get("/category/:categoryName", async (req, res) => {
-  try {
-    const { categoryName } = req.params;
-    const donations = await Donation.find({ category: categoryName }).sort({ createdAt: -1 });
-    res.json({ ok: true, donation: donations });
-  } catch (err) {
-    console.error("Fetch category donations error:", err);
-    res.status(500).json({ ok: false, message: "Server error" });
-  }
-});
-
-// ------------------- GET DONATION BY ID -------------------
+// GET DONATION BY ID
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;

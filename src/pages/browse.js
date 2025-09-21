@@ -125,6 +125,7 @@ export default function Browse() {
                   <img src={`http://localhost:5000/${d.image}`} alt={d.title} />
                   <div className="overlay">
                     <strong>{d.title}</strong>
+                    <p>{d.description}</p> {/* ✅ description displayed */}
                     <br />
                     {d.firstName} {d.lastName}
                   </div>
