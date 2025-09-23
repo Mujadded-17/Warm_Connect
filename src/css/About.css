@@ -1,39 +1,110 @@
+/* Wrapper & Font */
 .about-wrapper {
-  padding: 40px 20px;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 60px 20px;
   font-family: 'Arial', sans-serif;
   color: #333;
 }
 
+/* Header */
 .about-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .about-header h1 {
-  font-size: 2.5rem;
-  color: #e07b39; /* brownish-orange theme */
+  font-size: 3rem;
+  color: #e07b39;
+  margin-bottom: 10px;
 }
 
-.about-content h2 {
-  margin-top: 25px;
+.subtitle {
+  font-size: 1.3rem;
+  color: #555;
+}
+
+/* Sections container */
+.about-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+/* Cards */
+.about-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  padding: 30px;
+  flex: 1 1 400px;
+  max-width: 450px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Card Icons */
+.icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
   color: #e07b39;
 }
 
-.about-content p {
-  margin-top: 10px;
-  line-height: 1.6;
+/* Card headings */
+.about-card h2 {
+  font-size: 1.8rem;
+  color: #e07b39;
+  margin-bottom: 15px;
+}
+
+/* Card text */
+.about-card p {
   font-size: 1.1rem;
+  line-height: 1.7;
 }
 
-.highlight {
-  color: #e07b39;
-  font-weight: bold;
+/* Motto Section */
+.about-motto {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .motto {
-  font-size: 1.5rem;
-  margin-top: 20px;
-  text-align: center;
+  font-size: clamp(1.5rem, 8vw, 3rem);
+  font-weight: normal;
+  color: #e07b39;
+  line-height: 1.0;
+}
+
+/* Highlight */
+.highlight {
+  color: #e07b39;
+  font-weight: normal;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-sections {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-card {
+    max-width: 90%;
+    padding: 25px;
+  }
+
+  .about-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
 }
