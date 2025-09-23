@@ -11,6 +11,7 @@ const donationSchema = new mongoose.Schema({
   category: { type: String, required: true },
   image: String,                      // saved file path
   option: { type: String, enum: ["pickup", "delivery"], default: "pickup" },
+  description: { type: String, trim: true, default: '' },
 
   createdAt: { type: Date, default: Date.now },
 });
