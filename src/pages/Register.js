@@ -9,40 +9,51 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
 
-    // Name validation
-    const nameRegex = /^[a-zA-Z]+( [a-zA-Z]+)*$/;
-    if (!nameRegex.test(name)) {
+    // ===== Validations =====
+
+    // Name: only letters + spaces, not empty or just spaces
+    const nameTrimmed = name.trim();
+    const nameRegex = /^[A-Za-z]+( [A-Za-z]+)*$/;
+    if (!nameTrimmed || !nameRegex.test(nameTrimmed)) {
       setError('Name can only contain letters and spaces');
       return;
     }
 
-    // Email validation
+    // Email: basic valid format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError('Please enter a valid email');
+      setError('Please enter a valid email address');
       return;
     }
 
-    // Password validation (min 8 chars, letters + digits)
+    // Password: at least 8 chars, letters + digits
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (!passwordRegex.test(password)) {
       setError('Password must be at least 8 characters and include letters and numbers');
       return;
     }
 
+    setLoading(true);
+
     try {
-      const res = await axios.post('http://localhost:5000/api/register', { name, email, password });
+      const res = await axios.post('http://localhost:5000/api/auth/register', { name: nameTrimmed, email, password });
       setSuccess(res.data.message);
-      setError('');
-      navigate('/login');
+      console.log("Registration successful:", res.data);
+      setTimeout(() => navigate('/login'), 1500);
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
-      setSuccess('');
+      console.error("Registration error:", err);
+      const msg = err.response?.data?.message || err.message || 'Registration failed';
+      setError(msg);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -85,15 +96,16 @@ const Register = () => {
               required
             />
           </div>
-          <button type="submit">Register</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
+          </button>
         </form>
 
         {success && <p style={{ color: 'green' }}>{success}</p>}
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
         <p className="toggle-message">
-          Already have an account?{' '}
-          <Link to="/login" className="toggle-link">Login</Link>
+          Already have an account? <Link to="/login" className="toggle-link">Login</Link>
         </p>
 
         <p className="browse-link">
