@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../css/Login.css';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../css/Login.css";
+import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!emailRegex.test(email)) {
-      setError("Invalid email format");
-      return;
-    }
+    setError(""); // clear previous errors
+    setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/login', { email, password });
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      navigate('/profile');
+      const res = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      navigate("/profile");
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      console.error("Login error:", err); // Log full error
+      // Show backend message if exists
+      const msg = err.response?.data?.message || err.message || "Login failed";
+      setError(msg);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,18 +60,19 @@ const Login = () => {
               required 
             />
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </form>
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <p className="forgot-password">
           <Link to="/forgot-password">Forgot Password?</Link>
         </p>
 
         <p className="toggle-message">
-          Don't have an account?{' '}
-          <Link to="/register" className="toggle-link">Register</Link>
+          Don't have an account? <Link to="/register" className="toggle-link">Register</Link>
         </p>
 
         <p className="browse-link">
