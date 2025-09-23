@@ -181,7 +181,7 @@ export default function Post() {
             <input
               type="email"
               name="email"
-              placeholder="example@gmail.com or example@university.edu"
+              placeholder="[name]@gmail.com or [name]@university.edu"
               value={form.email}
               onChange={handleChange}
               className="input-field"
