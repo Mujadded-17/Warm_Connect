@@ -44,7 +44,15 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { name: nameTrimmed, email, password });
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
+
+      const res = await axios.post(`${API_URL}/api/auth/register`, { 
+        name: nameTrimmed, 
+        email, 
+        password 
+      });
+
       setSuccess(res.data.message);
       console.log("Registration successful:", res.data);
       setTimeout(() => navigate('/login'), 1500);
