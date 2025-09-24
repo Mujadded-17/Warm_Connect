@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,10 +11,26 @@ import styles from '../css/myNav.module.css';
 
 const NavBarComponent = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  // Check localStorage for logged-in user
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/"); // back to home
+  };
 
   // Handlers
   const handleStoriesClick = () => {
-    navigate("/"); // Go to home
+    navigate("/");
     setTimeout(() => {
       const el = document.getElementById("testimonials");
       if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -45,24 +61,36 @@ const NavBarComponent = () => {
             </NavDropdown>
           </Nav>
 
-          <Button
-            as={Link}
-            to="/login"
-            className={styles.loginBtn}
-            variant="outline-primary"
-          >
-            Login
-          </Button>
-
-          <Button
-            as={Link}
-            to="/profile"
-            variant="link"
-            className="ms-2 p-0"
-            style={{ fontSize: "1.8rem", color: "#000" }}
-          >
-            <CgProfile />
-          </Button>
+          {user ? (
+            <>
+              <span className="me-3">Hello, {user.name}</span>
+              <Button
+                onClick={handleLogout}
+                className={styles.loginBtn}
+                variant="outline-danger"
+              >
+                Logout
+              </Button>
+              <Button
+                as={Link}
+                to="/profile"
+                variant="link"
+                className="ms-2 p-0"
+                style={{ fontSize: "1.8rem", color: "#000" }}
+              >
+                <CgProfile />
+              </Button>
+            </>
+          ) : (
+            <Button
+              as={Link}
+              to="/login"
+              className={styles.loginBtn}
+              variant="outline-primary"
+            >
+              Login
+            </Button>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

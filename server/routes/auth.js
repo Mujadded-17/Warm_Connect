@@ -65,6 +65,31 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// ===== GET CURRENT USER (/me) =====
+router.get("/me", async (req, res) => {
+  try {
+    // Grab token from headers
+    const token = req.header("Authorization")?.replace("Bearer ", "");
+    if (!token) {
+      return res.status(401).json({ message: "No token, authorization denied" });
+    }
+
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Find user in DB
+    const user = await User.findById(decoded.id).select("-password -resetToken -resetTokenExpiration");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ user });
+  } catch (error) {
+    console.error("Get current user error:", error.message);
+    res.status(500).json({ message: "Server error fetching user" });
+  }
+});
+
 // ===== FORGOT PASSWORD =====
 router.post("/forgot-password", async (req, res) => {
   try {
@@ -81,7 +106,7 @@ router.post("/forgot-password", async (req, res) => {
     await user.save();
 
     // Email content
-    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`; // frontend reset page
+    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
     const mailOptions = {
       from: `"WarmConnect" <${process.env.EMAIL_USER}>`,
       to: user.email,
@@ -100,7 +125,7 @@ router.post("/forgot-password", async (req, res) => {
 
     res.json({ message: "Password reset email sent successfully. Check your inbox!" });
   } catch (error) {
-    console.error("Forgot Password error:", error); // <- full error
+    console.error("Forgot Password error:", error);
     res.status(500).json({ message: "Server error during password reset" });
   }
 });

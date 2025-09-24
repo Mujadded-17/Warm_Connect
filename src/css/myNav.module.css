@@ -1,8 +1,13 @@
 .myColor{
     background-color: #ffb194 !important;
 }
-.loginBtn{
-    background-color: #c4532a !important;
-    color: black;
-    border: white;
+.loginBtn {
+  background-color: #c4532a !important;
+  color: black !important;
+  border: none !important;
+  padding: 6px 16px !important;   /* smaller padding */
+  border-radius: 6px !important;  /* rounded edges */
+  width: auto !important;         /* don’t stretch */
+  min-width: 80px;                /* keep a minimum size */
+  text-align: center;
 }

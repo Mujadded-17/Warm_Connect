@@ -24,6 +24,8 @@ app.use(express.json());
 
 app.use(express.json());
 
+app.use("/api", authRoutes);
+
 // Serve /uploads statically
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
