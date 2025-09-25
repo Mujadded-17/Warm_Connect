@@ -1,50 +1,55 @@
 .contact-container {
   max-width: 1000px;
-  margin: 50px auto;
-  padding: 30px;
+  margin: 60px auto 40px;
+  padding: 0 20px;
   text-align: center;
   font-family: 'Poppins', sans-serif;
+  color: #333;
 }
 
-.contact-container h2 {
-  color: #d87c2b;
-  font-size: 2.2rem;
+.contact-title {
+  font-size: 2.5rem;
+  color: #c25a19; /* Warm accent */
+  margin-bottom: 8px;
+}
+
+.contact-subtitle {
+  font-size: 1.1rem;
   margin-bottom: 40px;
+  color: #555;
 }
 
 .founders-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
 }
 
 .founder-card {
-  background: #fff8f0;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  background: #fff2ec;
+  border-radius: 18px;
+  padding: 24px 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.founder-img {
-  width: 120px;
-  height: 120px;
-  background: #ddd;
-  border-radius: 50%;
-  margin: 0 auto 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.founder-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.founder-name {
+  font-size: 1.2rem;
   font-weight: 600;
-  color: #555;
+  margin-bottom: 4px;
 }
 
-.founder-card h3 {
-  margin: 10px 0 5px;
-  color: #d87c2b;
+.founder-email a {
+  color: #636363;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.founder-card p {
-  color: #555;
-  font-size: 0.95rem;
+.founder-email a:hover {
+  color: #c25a19;
 }
